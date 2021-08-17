@@ -39,7 +39,33 @@ function App() {
           </li>
         </ul>
       </nav>
-      <main className="emails">{/* Render a list of emails here */}</main>
+      <main className="emails">
+        <ul>
+          {emails.map((email) => (
+            <li className="email read">
+              {console.log("email inside li: ", email)}
+              <div className="select">
+                <input
+                  className="select-checkbox"
+                  type="checkbox"
+                  checked={email.read}
+                  // onChange={??}
+                />
+              </div>
+              <div className="star">
+                <input
+                  className="star-checkbox"
+                  type="checkbox"
+                  checked={email.starred}
+                  // onChange={??}
+                />
+              </div>
+              <div className="sender">{email.sender}</div>
+              <div className="title">{email.title}</div>
+            </li>
+          ))}
+        </ul>
+      </main>
     </div>
   )
 }
