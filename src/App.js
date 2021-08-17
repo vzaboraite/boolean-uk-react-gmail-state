@@ -12,6 +12,19 @@ function App() {
 
   const [emails, setEmails] = useState(initialEmails);
 
+  const toggleRead = (target) => {
+    const updatedEmails = emails.map((email) => {
+      if (email.id === target.id) {
+        console.log("email before update: ", email);
+        return { ...email, read: !email.read };
+      } else {
+        return email;
+      }
+    });
+
+    setEmails(updatedEmails);
+  };
+
   return (
     <div className="app">
       <Header />
@@ -53,7 +66,7 @@ function App() {
                   className="select-checkbox"
                   type="checkbox"
                   checked={email.read}
-                  // onChange={??}
+                  onChange={() => toggleRead(email)}
                 />
               </div>
               <div className="star">
