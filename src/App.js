@@ -6,7 +6,7 @@ import './App.css'
 
 function App() {
   // Use initialEmails for state
-  console.log(initialEmails)
+  const [emails, setEmails] = useState(initialEmails);
 
   return (
     <div className="app">
