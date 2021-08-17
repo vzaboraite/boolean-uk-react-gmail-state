@@ -1,11 +1,15 @@
 import { useState } from "react";
 
-import initialEmails from './data/emails'
+import Header from "./components/Header";
 
-import './App.css'
+import initialEmails from "./data/emails";
+
+import "./App.css";
 
 function App() {
   // Use initialEmails for state
+  console.log(initialEmails);
+
   const [emails, setEmails] = useState(initialEmails);
 
   return (
@@ -67,7 +71,7 @@ function App() {
         </ul>
       </main>
     </div>
-  )
+  );
 }
 
-export default App
+export default App;
