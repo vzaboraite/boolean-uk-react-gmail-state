@@ -16,7 +16,15 @@ function App() {
   const toggleRead = (targetEmail) => {
     const updatedEmails = emails.map((email) => {
       if (email.id === targetEmail.id) {
+        /* Version 1:*/
         return { ...targetEmail, read: !targetEmail.read };
+
+        /* Version 2:*/
+        // const updatedEmail = {
+        //   ...targetEmail,
+        //   read: !targetEmail.read
+        // }
+        // return updatedEmail;
       } else {
         return email;
       }
