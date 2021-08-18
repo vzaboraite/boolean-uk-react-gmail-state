@@ -46,31 +46,31 @@ function App() {
     setEmails(updatedEmails);
   };
 
-  const getUnreadEmails = (emails) => {
+  const filterUnreadEmails = (emails) => {
     const filteredEmails = emails.filter((email) => !email.read);
     return filteredEmails;
   };
 
-  const getStarredEmails = (emails) => {
+  const filterStarredEmails = (emails) => {
     const filteredEmails = emails.filter((email) => email.starred);
     return filteredEmails;
   };
 
   const applyFilters = (emails) => {
-    let result = emails;
+    let filteredEmails = emails;
     if (hideRead) {
-      result = getUnreadEmails(result);
+      filteredEmails = filterUnreadEmails(filteredEmails);
     }
 
     if (currentTab === "starred") {
-      result = getStarredEmails(result);
+      filteredEmails = filterStarredEmails(filteredEmails);
     }
 
-    return result;
+    return filteredEmails;
   };
 
-  const unreadEmails = getUnreadEmails(emails);
-  const starredEmails = getStarredEmails(emails);
+  const unreadEmails = filterUnreadEmails(emails);
+  const starredEmails = filterStarredEmails(emails);
 
   const emailsToRender = applyFilters(emails);
 
@@ -106,8 +106,8 @@ function App() {
               id="hide-read"
               type="checkbox"
               checked={hideRead}
-              onChange={() => {
-                setHideRead(!hideRead);
+              onChange={(event) => {
+                setHideRead(event.target.checked);
               }}
             />
           </li>
