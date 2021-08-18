@@ -13,11 +13,10 @@ function App() {
   const [emails, setEmails] = useState(initialEmails);
   const [hideRead, setHideRead] = useState(false);
 
-  const toggleRead = (target) => {
+  const toggleRead = (targetEmail) => {
     const updatedEmails = emails.map((email) => {
-      if (email.id === target.id) {
-        console.log("email before update: ", email);
-        return { ...email, read: !email.read };
+      if (email.id === targetEmail.id) {
+        return { ...targetEmail, read: !targetEmail.read };
       } else {
         return email;
       }
@@ -26,11 +25,10 @@ function App() {
     setEmails(updatedEmails);
   };
 
-  const toggleStar = (target) => {
+  const toggleStar = (targetEmail) => {
     const updatedEmails = emails.map((email) => {
-      if (email.id === target.id) {
-        console.log("email before update: ", email);
-        return { ...email, starred: !email.starred };
+      if (email.id === targetEmail.id) {
+        return { ...targetEmail, starred: !targetEmail.starred };
       } else {
         return email;
       }
@@ -82,10 +80,7 @@ function App() {
       <main className="emails">
         <ul>
           {emailsToRender.map((email) => (
-            <li
-              key={email.id}
-              className={"email " + (email.read ? "read" : "unread")}
-            >
+            <li key={email.id} className={email.read ? "email read" : "email"}>
               <div className="select">
                 <input
                   className="select-checkbox"
