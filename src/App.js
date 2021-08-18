@@ -12,6 +12,7 @@ function App() {
 
   const [emails, setEmails] = useState(initialEmails);
   const [hideRead, setHideRead] = useState(false);
+  const [currentTab, setCurrentTab] = useState("inbox");
 
   const toggleRead = (targetEmail) => {
     const updatedEmails = emails.map((email) => {
@@ -50,7 +51,30 @@ function App() {
     return filteredEmails;
   };
 
-  let emailsToRender = hideRead ? getUnreadEmails(emails) : emails;
+  const getStarredEmails = (emails) => {
+    const filteredEmails = emails.filter((email) => email.starred);
+    return filteredEmails;
+  };
+
+  const applyFilters = (emails) => {
+    let result = emails;
+    if (hideRead) {
+      result = getUnreadEmails(result);
+    }
+
+    if (currentTab === "starred") {
+      result = getStarredEmails(result);
+    }
+
+    return result;
+  };
+
+  const unreadEmails = getUnreadEmails(emails);
+  const starredEmails = getStarredEmails(emails);
+
+  const emailsToRender = applyFilters(emails);
+
+  console.log("current tab: ", currentTab);
 
   return (
     <div className="app">
@@ -58,18 +82,22 @@ function App() {
       <nav className="left-menu">
         <ul className="inbox-list">
           <li
-            className="item active"
-            // onClick={() => {}}
+            className={currentTab === "inbox" ? "item active" : "item"}
+            onClick={() => {
+              setCurrentTab("inbox");
+            }}
           >
             <span className="label">Inbox</span>
-            <span className="count">?</span>
+            <span className="count">{unreadEmails.length}</span>
           </li>
           <li
-            className="item"
-            // onClick={() => {}}
+            className={currentTab === "starred" ? "item active" : "item"}
+            onClick={() => {
+              setCurrentTab("starred");
+            }}
           >
             <span className="label">Starred</span>
-            <span className="count">?</span>
+            <span className="count">{starredEmails.length}</span>
           </li>
 
           <li className="item toggle">
